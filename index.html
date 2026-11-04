@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Music Drawer</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+
+  <header>
+    <p>✦ A PERSONAL MUSIC COLLECTION ✦</p>
+    <h1>The Music Drawer</h1>
+    <p class="subtitle">Explore albums by your favorite artists.</p>
+  </header>
+
+  <main>
+    <section class="search">
+      <h2>Explore the Collection</h2>
+      <form id="search-form">
+        <input type="text" id="artist-input"
+          placeholder="Enter an artist's name..." required>
+        <button type="submit">Search</button>
+      </form>
+      <p id="status">Search for an artist to get started.</p>
+    </section>
+
+    <section class="collection">
+      <h2>My Collection ♡</h2>
+      <div id="album-container"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Powered by MusicBrainz API</p>
+  </footer>
+
+</body>
+</html>
