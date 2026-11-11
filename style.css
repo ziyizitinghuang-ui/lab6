@@ -1,4 +1,3 @@
-
 * {
   box-sizing: border-box;
 }
@@ -136,7 +135,7 @@ button:disabled {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 .suitcase-panel {
@@ -161,41 +160,36 @@ button:disabled {
 
 .packing-area {
   position: absolute;
-  top: 55%;
-  left: 17%;
-  width: 66%;
+  left: 16%;
+  top: 50%;
+  width: 68%;
   height: 32%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
-}
-
-#packed-items {
-  position: relative;
-  width: 100%;
-  height: 100%;
   pointer-events: none;
 }
 
-.packed-item {
-  position: absolute;
+#packed-combination {
   display: block;
-  height: auto;
-  max-width: none;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
-  opacity: 0;
-  transform: translate(-50%, -50%);
-  animation: packIn 0.45s ease forwards;
-  filter: drop-shadow(2px 3px 3px rgba(0, 0, 0, 0.15));
+  object-position: center;
+  animation: packIn 0.4s ease;
+  filter: drop-shadow(1px 2px 2px rgba(0, 0, 0, 0.15));
 }
 
 @keyframes packIn {
   from {
     opacity: 0;
-    transform: translate(-50%, -60%) scale(0.94);
+    transform: translateY(-6px);
   }
 
   to {
     opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
+    transform: translateY(0);
   }
 }
 

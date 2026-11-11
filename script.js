@@ -1,4 +1,3 @@
-
 const form = document.getElementById("weather-form");
 const cityInput = document.getElementById("city-input");
 const statusText = document.getElementById("status");
@@ -6,132 +5,86 @@ const weatherInfo = document.getElementById("weather-info");
 const cityName = document.getElementById("city-name");
 const temperatureText = document.getElementById("temperature");
 const weatherDescription = document.getElementById("weather-description");
-const packedItems = document.getElementById("packed-items");
+const packedCombination = document.getElementById("packed-combination");
 const packingList = document.getElementById("packing-list");
 const button = form.querySelector("button");
 
-const items = {
-  tshirt: {
-    name: "T-shirt",
-    image: "tshirt.png",
-    width: 48
+const combinations = {
+  hot: {
+    image: "01_hot_weather.png",
+    items: ["T-shirt", "Light Pants", "Cap", "Sunglasses"]
   },
-  jacket: {
-    name: "Light Jacket",
-    image: "jacket.png",
-    width: 52
+  warm: {
+    image: "02_warm_weather.png",
+    items: ["Shirt", "Light Jacket", "Jeans"]
   },
-  shirt: {
-    name: "Shirt",
-    image: "shirt.png",
-    width: 47
+  cool: {
+    image: "03_cool_weather.png",
+    items: ["Cardigan", "Jeans", "Scarf", "Beanie"]
   },
-  scarf: {
-    name: "Scarf",
-    image: "scarf.png",
-    width: 30
+  cold: {
+    image: "04_cold_weather.png",
+    items: ["Puffer Jacket", "Sweater", "Scarf", "Beanie", "Gloves"]
   },
-  puffer: {
-    name: "Puffer Jacket",
-    image: "puffer-jacket.png",
-    width: 55
+  mildRain: {
+    image: "05_mild_rain.png",
+    items: ["Rain Jacket", "Cardigan", "Jeans", "Umbrella"]
   },
-  cardigan: {
-    name: "Cardigan",
-    image: "cardigan.png",
-    width: 52
+  coldRain: {
+    image: "06_cold_rain.png",
+    items: ["Rain Jacket", "Cardigan", "Scarf", "Beanie", "Umbrella"]
   },
-  jeans: {
-    name: "Jeans",
-    image: "jeans.png",
-    width: 48
+  snowy: {
+    image: "07_snowy_weather.png",
+    items: ["Puffer Jacket", "Cardigan", "Scarf", "Beanie", "Gloves"]
   },
-  beanie: {
-    name: "Beanie",
-    image: "beanie.png",
-    width: 28
+  coolRain: {
+    image: "08_cool_rain.png",
+    items: ["Light Jacket", "Cardigan", "Jeans", "Umbrella"]
   },
-  cap: {
-    name: "Cap",
-    image: "cap.png",
-    width: 29
+  hotRain: {
+    image: "09_hot_rain.png",
+    items: ["T-shirt", "Light Pants", "Cap", "Sunglasses", "Umbrella"]
   },
-  gloves: {
-    name: "Gloves",
-    image: "gloves.png",
-    width: 27
+  warmScarf: {
+    image: "10_warm_with_scarf.png",
+    items: ["Shirt", "Light Jacket", "Jeans", "Scarf"]
   },
-  pants: {
-    name: "Pants",
-    image: "pants.png",
-    width: 47
+  winterLayers: {
+    image: "11_winter_layers.png",
+    items: ["Puffer Jacket", "Cardigan", "Scarf", "Beanie", "Gloves"]
   },
-  umbrella: {
-    name: "Umbrella",
-    image: "umbrella.png",
-    width: 23
-  },
-  sunglasses: {
-    name: "Sunglasses",
-    image: "sunglasses.png",
-    width: 26
+  coolLayers: {
+    image: "12_cool_layers.png",
+    items: ["Rain Jacket", "Sweater", "Jeans", "Scarf", "Beanie"]
   }
-};
-
-const layouts = {
-  3: [
-    { x: 29, y: 31 },
-    { x: 72, y: 31 },
-    { x: 50, y: 74 }
-  ],
-  4: [
-    { x: 28, y: 30 },
-    { x: 73, y: 30 },
-    { x: 28, y: 74 },
-    { x: 73, y: 74 }
-  ],
-  5: [
-    { x: 28, y: 28 },
-    { x: 73, y: 28 },
-    { x: 24, y: 75 },
-    { x: 52, y: 75 },
-    { x: 79, y: 75 }
-  ],
-  6: [
-    { x: 25, y: 27 },
-    { x: 72, y: 27 },
-    { x: 23, y: 75 },
-    { x: 51, y: 75 },
-    { x: 78, y: 75 },
-    { x: 51, y: 48 }
-  ]
 };
 
 function getWeatherDescription(code) {
   if (code === 0) return "Clear Sky";
   if (code <= 3) return "Cloudy";
   if (code === 45 || code === 48) return "Foggy";
-  if (code >= 51 && code <= 67) return "Rainy";
-  if (code >= 71 && code <= 77) return "Snowy";
-  if (code >= 80 && code <= 82) return "Rainy";
-  if (code >= 85 && code <= 86) return "Snowy";
+
+  if (
+    (code >= 51 && code <= 67) ||
+    (code >= 80 && code <= 82)
+  ) {
+    return "Rainy";
+  }
+
+  if (
+    (code >= 71 && code <= 77) ||
+    (code >= 85 && code <= 86)
+  ) {
+    return "Snowy";
+  }
+
   if (code >= 95) return "Thunderstorm";
+
   return "Mixed Weather";
 }
 
-function getPackingItems(temp, code) {
-  let selected = [];
-
-  if (temp >= 25) {
-    selected = ["tshirt", "pants", "cap", "sunglasses"];
-  } else if (temp >= 15) {
-    selected = ["shirt", "jacket", "jeans"];
-  } else if (temp >= 5) {
-    selected = ["cardigan", "jeans", "scarf", "beanie"];
-  } else {
-    selected = ["puffer", "cardigan", "pants", "beanie", "gloves"];
-  }
-
+function getCombination(temp, code) {
   const rainy =
     (code >= 51 && code <= 67) ||
     (code >= 80 && code <= 82) ||
@@ -141,97 +94,64 @@ function getPackingItems(temp, code) {
     (code >= 71 && code <= 77) ||
     (code >= 85 && code <= 86);
 
+  if (snowy) {
+    return "snowy";
+  }
+
   if (rainy) {
-    selected.push("umbrella");
+    if (temp >= 25) return "hotRain";
+    if (temp >= 15) return "mildRain";
+    if (temp >= 5) return "coolRain";
+    return "coldRain";
   }
 
-  if (snowy && !selected.includes("gloves")) {
-    selected.push("gloves");
+  if (temp >= 25) return "hot";
+
+  if (temp >= 15) {
+    if (temp < 18) return "warmScarf";
+    return "warm";
   }
 
-  if (snowy && !selected.includes("beanie")) {
-    selected.push("beanie");
+  if (temp >= 5) {
+    if (temp < 8) return "coolLayers";
+    return "cool";
   }
 
-  return selected;
+  if (temp < 0) return "winterLayers";
+
+  return "cold";
 }
 
-function positionImage(image, item, position) {
-  const areaWidth = packedItems.clientWidth;
-  const areaHeight = packedItems.clientHeight;
+function displayCombination(key) {
+  const combination = combinations[key];
 
-  if (!areaWidth || !areaHeight) return;
+  packedCombination.classList.add("hidden");
 
-  const ratio = image.naturalWidth / image.naturalHeight;
+  packedCombination.alt =
+    "Packed suitcase with " + combination.items.join(", ");
 
-  let width = areaWidth * item.width / 100;
-  let height = width / ratio;
+  packedCombination.onload = function() {
+    packedCombination.classList.remove("hidden");
+  };
 
-  const maxHeight = areaHeight * 0.54;
+  packedCombination.onerror = function() {
+    statusText.textContent = "Unable to load the packing image.";
+  };
 
-  if (height > maxHeight) {
-    height = maxHeight;
-    width = height * ratio;
+  packedCombination.src = "images/" + combination.image;
+
+  if (
+    packedCombination.complete &&
+    packedCombination.naturalWidth > 0
+  ) {
+    packedCombination.classList.remove("hidden");
   }
 
-  const margin = 3;
-  const maxWidth = areaWidth - margin * 2;
-  const maxTotalHeight = areaHeight - margin * 2;
-
-  if (width > maxWidth) {
-    width = maxWidth;
-    height = width / ratio;
-  }
-
-  if (height > maxTotalHeight) {
-    height = maxTotalHeight;
-    width = height * ratio;
-  }
-
-  let x = areaWidth * position.x / 100;
-  let y = areaHeight * position.y / 100;
-
-  x = Math.max(width / 2 + margin,
-    Math.min(areaWidth - width / 2 - margin, x));
-
-  y = Math.max(height / 2 + margin,
-    Math.min(areaHeight - height / 2 - margin, y));
-
-  image.style.width = width + "px";
-  image.style.left = x + "px";
-  image.style.top = y + "px";
-}
-
-function displayPackingList(selected) {
-  packedItems.innerHTML = "";
   packingList.innerHTML = "";
 
-  const layout = layouts[selected.length] || layouts[6];
-
-  selected.forEach(function(key, index) {
-    const item = items[key];
-    const position = layout[index];
-
-    if (!position) return;
-
-    const image = document.createElement("img");
-    image.src = "images/" + item.image;
-    image.alt = item.name;
-    image.className = "packed-item";
-    image.style.animationDelay = index * 0.12 + "s";
-
-    image.addEventListener("load", function() {
-      positionImage(image, item, position);
-    });
-
-    packedItems.appendChild(image);
-
-    if (image.complete && image.naturalWidth > 0) {
-      positionImage(image, item, position);
-    }
-
+  combination.items.forEach(function(item) {
     const listItem = document.createElement("li");
-    listItem.textContent = item.name;
+    listItem.textContent = item;
     packingList.appendChild(listItem);
   });
 }
@@ -284,8 +204,8 @@ async function getWeather(city) {
 
   weatherInfo.classList.remove("hidden");
 
-  const selected = getPackingItems(temp, code);
-  displayPackingList(selected);
+  const combinationKey = getCombination(temp, code);
+  displayCombination(combinationKey);
 }
 
 form.addEventListener("submit", async function(event) {
@@ -296,9 +216,12 @@ form.addEventListener("submit", async function(event) {
   if (city === "") return;
 
   button.disabled = true;
-  statusText.textContent = "Checking the weather and packing your bag...";
+
+  statusText.textContent =
+    "Checking the weather and packing your bag...";
+
   weatherInfo.classList.add("hidden");
-  packedItems.innerHTML = "";
+  packedCombination.classList.add("hidden");
   packingList.innerHTML = "";
 
   try {
@@ -311,19 +234,4 @@ form.addEventListener("submit", async function(event) {
   } finally {
     button.disabled = false;
   }
-});
-
-window.addEventListener("resize", function() {
-  const images = packedItems.querySelectorAll(".packed-item");
-  const layout = layouts[images.length] || layouts[6];
-
-  images.forEach(function(image, index) {
-    const key = Object.keys(items).find(function(itemKey) {
-      return items[itemKey].name === image.alt;
-    });
-
-    if (key && layout[index] && image.naturalWidth > 0) {
-      positionImage(image, items[key], layout[index]);
-    }
-  });
 });
