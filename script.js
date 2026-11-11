@@ -216,9 +216,7 @@ form.addEventListener("submit", async function(event) {
   if (city === "") return;
 
   button.disabled = true;
-
-  statusText.textContent =
-    "Checking the weather and packing your bag...";
+  statusText.textContent = "Checking the weather...";
 
   weatherInfo.classList.add("hidden");
   packedCombination.classList.add("hidden");
@@ -226,7 +224,7 @@ form.addEventListener("submit", async function(event) {
 
   try {
     await getWeather(city);
-    statusText.textContent = "Your suitcase is ready!";
+    statusText.textContent = "Your bag is packed!";
   } catch (error) {
     statusText.textContent = error.message;
     packingList.innerHTML =

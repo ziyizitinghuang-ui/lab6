@@ -10,15 +10,13 @@
 <body>
 
   <header>
-    <p class="subtitle">TRAVEL COMPANION</p>
     <h1>Pack for the Weather</h1>
-    <p>Wherever you're going, let's pack for the forecast.</p>
   </header>
 
   <main>
     <section class="search-panel">
       <h2>Where to?</h2>
-      <p>Enter your destination to get started.</p>
+      <p>Enter a city to check the weather.</p>
 
       <form id="weather-form">
         <input
@@ -34,7 +32,7 @@
 
       <div id="weather-info" class="weather-info hidden">
         <p class="small-label">YOUR DESTINATION</p>
-        <h3 id="city-name"></h3>
+        <h3 id="city-name">Destination</h3>
         <p class="temperature" id="temperature"></p>
         <p id="weather-description"></p>
       </div>
@@ -42,7 +40,7 @@
 
     <section class="suitcase-panel">
       <h2>Your Suitcase</h2>
-      <p>Everything you need for the weather ahead.</p>
+      <p>Here's what to pack.</p>
 
       <div class="suitcase">
         <img
@@ -52,17 +50,22 @@
         >
 
         <div class="packing-area">
-          <img id="packed-combination" alt="" class="hidden">
+          <img
+            id="packed-combination"
+            src="images/03_cool_weather.png"
+            alt="Packed clothing"
+            class="hidden"
+          >
         </div>
       </div>
     </section>
 
     <section class="packing-panel">
       <h2>Packing List</h2>
-      <p>A few things to bring along.</p>
+      <p>What you'll need for your trip.</p>
 
       <ul id="packing-list">
-        <li>Your packing list will appear here.</li>
+        <li>Enter a city to see your packing list.</li>
       </ul>
     </section>
   </main>
